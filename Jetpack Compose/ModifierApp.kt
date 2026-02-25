@@ -1,50 +1,55 @@
-// package com.example.application244 - здесь название вашего приложения
+// package com.example.application245
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// Точка сборки и запуска окна мобильного приложения
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        // отрисовка элементов интерфейса (Composable-функций) на экране приложения
+        // Отрисовка элементов интерфейса (Composable-функций) на экране приложения
         setContent {
-            Application1()
+            ModifierFunction()
         }
     }
 }
 
 @Composable
-fun Application1(){
-    val message = remember { mutableStateOf("") }
-    val hiddenMessage = remember { mutableStateOf("") }
+fun ModifierFunction(){
     Column() {
-        Text(text = "My First App", fontSize = 20.sp)
-        TextField(value = message.value, onValueChange = {message.value = it})
-        Button(onClick = {
-            if (message.value != ""){
-                hiddenMessage.value = message.value
-                message.value = ""
-            }
-        }) { Text(text = "Click on me!") }
-        Text(hiddenMessage.value)
+        Text(
+            text = "Привет сосед!",
+            modifier = Modifier
+                .padding(5.dp) // Модификатор внешнего отступа (от фона)
+                .background(color = Color.Yellow, shape = RoundedCornerShape(10.dp)) // Модификатор заднего фона
+                .padding(5.dp), // Модификатор внутреннего отступа (от текста)
+            fontSize = 15.sp,
+            color = Color(0xFFF44336) // Цвет текста
+        )
+        Text(
+            text = "Как дела?",
+            modifier = Modifier
+                .clickable(onClick = {})
+        )
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true) // аннотация для предпросмотра Composable-функций
 @Composable
-fun PreviewForMyFunctions(){
-    Application1()
+fun ComposablePreview(){
+    ModifierFunction()
 }
